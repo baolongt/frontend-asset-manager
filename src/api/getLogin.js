@@ -1,4 +1,4 @@
-export const getLogin = () => {
+export const getLogin = async () => {
 	const getURL = () => {
 		return process.env.REACT_APP_ENV.trim() === "dev" ? (
 			<>{process.env.REACT_APP_DEV_URL}</>
@@ -6,6 +6,5 @@ export const getLogin = () => {
 			<>{process.env.REACT_APP_PROD_URL}</>
 		);
 	};
-
 	return getURL();
 };
