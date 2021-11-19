@@ -17,7 +17,9 @@ const Login = () => {
 			setIsInvalid(true);
 		} else if (data.message === "SUCCESS_LOGIN_USER") {
 			localStorage.setItem("jwtToken", data.data.token);
-			localStorage.setItem("username", data.data.username);
+			localStorage.setItem("username",data.data.username);
+			localStorage.setItem("refreshToken",data.data.refreshToken);
+			localStorage.setItem("email",data.data.email);
 			setIsInvalid(false);
 			history.push("/home");
 		}

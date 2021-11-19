@@ -1,31 +1,31 @@
 import { Button, Modal } from 'react-bootstrap';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { getLogout } from '../api/getLogout';
+import { useHistory } from "react-router-dom";
 const Logout = () => {
 
-
     const [show, setShow] = useState(false);
-
-    const [token, setToken] = useState({
-        accessToken: localStorage.getItem("token"),
-        refeshToken: localStorage.getItem("refeshToken")
-    })
-
-    const [isLogout, setIsLogout] = useState(false)
-
     const handleClose = () => setShow(false);
-
     const handleShow = () => setShow(true);
 
-    const handleLogout = async () =>{
-        setShow(true)
+    const [token, setToken] = useState({
+        accessToken: localStorage.getItem("jwtToken"),
+        refreshToken: localStorage.getItem("refreshToken")
+    })
+
+    let history = useHistory();
+
+
+
+    const handleLogout = async () => {
         let data = await getLogout(token)
-        if(data == null){
-            console.log("logout cancel")
-        }else if (data.message === "SUCCESS_LOGOUT_USER"){
+        if (data.message === "SUCCESS_LOGOUT_USER") {
             localStorage.removeItem("jwtToken")
-            setIsLogout(true);
+            localStorage.removeItem("refreshToken")
+            history.push("/login")
         }
+
+      
     }
 
     return (

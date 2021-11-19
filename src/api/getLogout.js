@@ -6,12 +6,12 @@ export const getLogout = async (formData) => {
             ? process.env.REACT_APP_DEV_URL
             : process.env.REACT_APP_PROD_URL;
 
-    url += "/logout";
-    console.log(url)
+    url += "/auth/logout";
     let data;
     let respone = await axios
         .post(url,{ 
-                ...formData
+                accessToken : formData.accessToken,
+                refreshToken: formData.refreshToken
             })
             .then((res) =>{
                 data = res.data;
@@ -19,6 +19,6 @@ export const getLogout = async (formData) => {
             .catch((e) =>{
                 data = null;
             });
+    return data;
 
-            return data;
 }
