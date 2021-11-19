@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLogin } from "../../api/getLogin";
 const Login = () => {
@@ -6,13 +7,20 @@ const Login = () => {
 		username: "",
 		password: ""
 	});
+	const [isInvalid, setIsInvalid] = useState(false);
+	const [isLogin, setIsLogin] = useState(false);
 
-	const [isValid, setIsValid] = useState(true);
+	useEffect(() => {
+		console.log("redirect");
+	}, [isLogin]);
 
 	const handleLogin = async () => {
 		let data = await getLogin(info);
-		if (data.message !== "SUCCESS_LOGIN_USER") {
-			setIsValid(false);
+		if (data == null) {
+			setIsInvalid(true);
+		} else if (data.message === "SUCCESS_LOGIN_USER") {
+			setIsInvalid(false);
+			setIsLogin(true);
 		}
 	};
 
@@ -45,7 +53,7 @@ const Login = () => {
 					/>
 				</div>
 				<div
-					class={`alert alert-danger my-2 ${isValid ? "d-none" : ""}`}
+					class={`alert alert-danger my-2 ${isInvalid ? "" : "d-none"}`}
 					role="alert"
 				>
 					You have entered an invalid username or password
