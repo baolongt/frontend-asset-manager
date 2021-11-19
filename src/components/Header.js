@@ -12,10 +12,10 @@ const Header = () => {
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
                         <NavDropdown className="fs-5" title="Nguyen"  id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">
+                            <NavDropdown.Item href="#action/changePass">
                                 <ChangePass></ChangePass>
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2" >
+                            <NavDropdown.Item href="#action/logout" >
                                 <Logout></Logout>
                             </NavDropdown.Item>
                         </NavDropdown>
