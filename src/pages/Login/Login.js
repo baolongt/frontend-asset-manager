@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { getLogin } from "../../api/getLogin";
 const Login = () => {
 	const [info, setInfo] = useState({
 		username: "",
 		password: ""
 	});
 
+	const [isValid, setIsValid] = useState(true);
+
+	const handleLogin = async () => {
+		let data = await getLogin(info);
+		if (data.message !== "SUCCESS_LOGIN_USER") {
+			setIsValid(false);
+		}
+	};
+
 	return (
-		<div className="flex">
-			<div className="flex flex-column mx-auto bg-white w-25 p-3">
-				<p class="h3 text-g">Log in</p>
+		<div className="flex text-start d-grid">
+			<div className="flex flex-column mx-auto bg-white p-3 col-4">
+				<p class="h3 text-secondary text-center">Log in</p>
 				<div>
 					<label className="form-label text-secondary" htmlFor="username">
 						Username
@@ -35,11 +44,14 @@ const Login = () => {
 						id="password"
 					/>
 				</div>
-				<div className="mt-3">
-					<button className="ms-3 btn btn-danger">Log in</button>
-					<Link className="mt-4 ms-3 text-decoration-none" to="/forgot">
-						Forgot password?
-					</Link>
+				<div
+					class={`alert alert-danger my-2 ${isValid ? "d-none" : ""}`}
+					role="alert"
+				>
+					You have entered an invalid username or password
+				</div>
+				<div className="d-grid mt-3" onClick={() => handleLogin()}>
+					<button className="col-4 offset-4 btn btn-danger">Log in</button>
 				</div>
 			</div>
 		</div>
