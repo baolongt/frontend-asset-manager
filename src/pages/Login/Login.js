@@ -19,6 +19,7 @@ const Login = () => {
 		if (data == null) {
 			setIsInvalid(true);
 		} else if (data.message === "SUCCESS_LOGIN_USER") {
+			localStorage.setItem("jwtToken", data.data.token);
 			setIsInvalid(false);
 			setIsLogin(true);
 		}
