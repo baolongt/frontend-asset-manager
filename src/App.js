@@ -8,7 +8,11 @@ function App() {
 		<div>
 			<Route path="/login" component={Login} />
 			<Route path="/register" component={Register} />
+<<<<<<< HEAD
 			<Route path="/home" component={Home} />
+=======
+			<Route path="/home" component={Home}/>
+>>>>>>> 50f6415075b3d1aad3c24bdc47827035eb203f10
 		</div>
 	);
 }

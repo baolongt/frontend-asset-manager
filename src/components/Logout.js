@@ -15,6 +15,8 @@ const Logout = () => {
 
     const handleClose = () => setShow(false);
 
+    const handleShow = () => setShow(true);
+
     const handleLogout = async () =>{
         setShow(true)
         let data = await getLogout(token)
@@ -28,7 +30,7 @@ const Logout = () => {
 
     return (
         <>
-            <Button variant="default" onClick={() => handleLogout()}>
+            <Button variant="default" onClick={() => handleShow()}>
                 Log out
             </Button>
 
