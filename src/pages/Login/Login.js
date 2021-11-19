@@ -2,17 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getLogin } from "../../api/getLogin";
+import { useHistory } from "react-router-dom";
 const Login = () => {
+	let history = useHistory();
 	const [info, setInfo] = useState({
 		username: "",
 		password: ""
 	});
 	const [isInvalid, setIsInvalid] = useState(false);
-	const [isLogin, setIsLogin] = useState(false);
-
-	useEffect(() => {
-		console.log("redirect");
-	}, [isLogin]);
 
 	const handleLogin = async () => {
 		let data = await getLogin(info);
@@ -22,7 +19,7 @@ const Login = () => {
 			localStorage.setItem("jwtToken", data.data.token);
 			localStorage.setItem("username", data.data.username);
 			setIsInvalid(false);
-			setIsLogin(true);
+			history.push("/home");
 		}
 	};
 
